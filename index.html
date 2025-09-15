@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hidden Sea Pulse | Home</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h2 class="logo">
+      เว็ปทดสอบบุคลิกภาพของคนที่อ่อนไหวต่อสิ่งรอบตัวเป็นพิเศษ | Hidden sea pulse
+    </h2>
+    <nav class="navigation">
+      <a href="#" class="btnLogin-popup">Home</a>
+    </nav>
+  </header>
+
+  <!-- หน้าแรก -->
+  <main data-aos="fade-up" id="start-screen">
+    <button class="start-btn">Start</button>
+  </main>
+
+  <!-- หน้าอธิบาย HSP -->
+  <div id="hsp-info-screen" style="display: none;" class="hsp-info-container">
+    <div class="hsp-background-layer"></div>
+    <div class="intro-content">
+      <h2>HSP คืออะไร?</h2>
+      <p>
+        บุคลิกภาพแบบ Highly Sensitive Person (HSP) คือบุคคลที่ระบบประสาทและอารมณ์ที่ไวต่อสิ่งเร้ากว่าคนทั่วไป พวกเขาจะรับรู้รายละเอียดเล็กๆน้อยๆของสิ่งรอบตัวได้ลึกซึ้งกว่าคนทั่วไป ไม่ว่าจะเป็นเสียง กลิ่น แสง สี อุณหภูมิ หรือแม้แต่อารมณ์ของคนรอบข้าง ทำให้พวกเขามีความสามารถในการมองเห็นและเข้าใจโลกอย่างละเอียด ลึกซึ้ง และมีความเห็นอกเห็นใจผู้อื่นมากเป็นพิเศษ พวกเขามีจินตนาการและความคิดสร้างสรรค์สูง มองเห็นมุมเล็กๆ ที่คนอื่นมองข้ามได้ง่ายจึงมักเก่งในงานที่ต้องใช้ความละเอียดรอบคอบ ความคิดสร้างสรรค์หรือการรับรู้อารมณ์คนอื่นอย่างลึกซึ้ง แต่อีกด้านหนึ่งความไวต่อสิ่งกระตุ้นที่สูงกว่าค่าเฉลี่ยนี้ก็ทำให้พวกเขาเหนื่อย เครียด หรือหมดพลังได้ง่ายในสภาพแวดล้อมที่เต็มไปด้วยสิ่งเร้า เช่น เสียงดัง ฝูงชน หรือสถานการณ์ที่มีแรงกดดันและความขัดแย้ง พวกเขามักรู้สึกเจ็บปวดหรือกดดันต่อคำวิจารณ์หรือความขัดแย้งได้ง่ายกว่าและหากไม่รู้จักดูแลตนเองก็อาจนำไปสู่ภาวะวิตกกังวลหรือหมดแรงได้ อย่างไรก็ตาม หาก HSP รู้จักจัดสมดุลในชีวิต เช่น การเลือกสภาพแวดล้อมที่เหมาะสม การพักผ่อนให้เพียงพอ การตั้งขอบเขตกับผู้อื่น และการใช้ความสามารถด้านการรับรู้อารมณ์ของตนในทางสร้างสรรค์ เช่น งานศิลปะ งานช่วยเหลือผู้อื่น หรืองานที่ต้องใช้การสังเกตอย่างละเอียด บุคลิกภาพนี้จะกลายเป็นจุดแข็งที่ทรงพลัง ช่วยให้พวกเขาใช้ชีวิตได้อย่างเต็มศักยภาพและมีคุณค่าต่อสังคมโดยไม่รู้สึกว่าความอ่อนไหวของตนเป็นภาระอีกต่อไป
+      </p>
+      <button id="begin-quiz-btn" class="btn">เริ่มแบบทดสอบ</button>
+    </div>
+  </div>
+
+  <!-- ใส่ audio element ให้ถูกที่ -->
+  <audio id="click-sound" src="click.mp3" preload="auto"></audio>
+  <audio id="bg-music" src="bg-music.mp3" loop muted preload="auto"></audio>
+  <!-- JS -->
+ <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  const clickSound = document.getElementById('click-sound');
+  const startBtn = document.querySelector('.start-btn');
+  const beginQuizBtn = document.getElementById('begin-quiz-btn');
+  const startScreen = document.getElementById('start-screen');
+  const hspInfoScreen = document.getElementById('hsp-info-screen');
+  const bgMusic = document.getElementById('bg-music');
+
+  startBtn.addEventListener('click', () => {
+  clickSound.currentTime = 0;
+  clickSound.play();
+
+  // ปิด mute แล้วเริ่มเพลง
+  bgMusic.muted = false;
+  bgMusic.play().catch(err => {
+    console.log("ไม่สามารถเล่นเพลงอัตโนมัติได้:", err);
+  });
+
+  setTimeout(() => {
+    startScreen.style.display = 'none';
+    hspInfoScreen.style.display = 'flex';
+  }, 300);
+});
+
+  if (beginQuizBtn) {
+    beginQuizBtn.addEventListener('click', () => {
+      clickSound.currentTime = 0;
+      clickSound.play();
+
+      setTimeout(() => {
+        window.location.href = 'nextpage.html';
+      }, 300);
+    });
+  } else {
+    console.log("❌ ไม่เจอปุ่ม begin-quiz-btn ใน DOM");
+  }
+</script>
+</body>
+</html>
